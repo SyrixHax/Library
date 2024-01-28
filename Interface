@@ -74,30 +74,45 @@ SlashUiLib.Name = "SlashUiLib"
 protect_gui(SlashUiLib)
 
 local xOffset = 20
-local uis = game:GetService("UserInputService")
-local keybindConnection
 
-function library:Destroy()
-	SlashUiLib:Destroy()
-	if keybindConnection then
-		keybindConnection:Disconnect()
-	end
-end
+function Gradient(Parent)
+	local Script = Instance.new("LocalScript", Parent)
 
-function library:Hide()
-	SlashUiLib.Enabled = not SlashUiLib.Enabled
-end
+	while true do
+		wait()
 
-function library:Keybind(key)
-	if keybindConnection then
-		keybindConnection:Disconnect()
-	end
+		Script.Parent.BackgroundColor3 = Color3.new(255/255, 0/255, 0/255)
 
-	keybindConnection = uis.InputBegan:Connect(function(input, gp)
-		if not gp and input.KeyCode == Enum.KeyCode[key] then
-			SlashUiLib.Enabled = not SlashUiLib.Enabled
+		for i = 0, 255, 10 do
+			wait()
+			Script.Parent.BackgroundColor3 = Color3.new(255/255, i/255, 0/255)
 		end
-	end)
+
+		for i = 255, 0, -10 do
+			wait()
+			Script.Parent.BackgroundColor3 = Color3.new(i/255, 255/255, 0/255)
+		end
+
+		for i = 0, 255, 10 do
+			wait()
+			Script.Parent.BackgroundColor3 = Color3.new(0/255, 255/255, i/255)
+		end
+
+		for i = 255, 0, -10 do
+			wait()
+			Script.Parent.BackgroundColor3 = Color3.new(0/255, i/255, 255/255)
+		end
+
+		for i = 0, 255, 10 do
+			wait()
+			Script.Parent.BackgroundColor3 = Color3.new(i/255, 0/255, 255/255)
+		end
+
+		for i = 255, 0, -10 do
+			wait()
+			Script.Parent.BackgroundColor3 = Color3.new(255/255, 0/255, i/255)
+		end
+	end
 end
 
 function library:Window(name)
@@ -125,6 +140,7 @@ function library:Window(name)
 	UiWindow.Active = true
 
 	Dragify(UiWindow)
+	Gradient(UiWindow)
 	xOffset = xOffset + 230
 
 	Header.Name = "Header"
@@ -183,41 +199,6 @@ function library:Window(name)
 	local functions = {}
 	sizes[winCount] = 33
 	listOffset[winCount] = 10
-
-	while true do
-		wait()
-		UiWindow.BackgroundColor3 = Color3.new(255/255, 0/255, 0/255)
-
-		for i = 0, 255, 10 do
-			wait()
-			UiWindow.BackgroundColor3 = Color3.new(255/255, i/255, 0/255)
-		end
-
-		for i = 255, 0, -10 do
-			wait()
-			UiWindow.BackgroundColor3 = Color3.new(i/255, 255/255, 0/255)
-		end
-
-		for i = 0, 255, 10 do
-			wait()
-			UiWindow.BackgroundColor3 = Color3.new(0/255, 255/255, i/255)
-		end
-
-		for i = 255, 0, -10 do
-			wait()
-			UiWindow.BackgroundColor3 = Color3.new(0/255, i/255, 255/255)
-		end
-
-		for i = 0, 255, 10 do
-			wait()
-			UiWindow.BackgroundColor3 = Color3.new(i/255, 0/255, 255/255)
-		end
-
-		for i = 255, 0, -10 do
-			wait()
-			UiWindow.BackgroundColor3 = Color3.new(255/255, 0/255, i/255)
-		end
-	end
 
 	function functions:Button(name, callback)
 		local callback = callback or function() end
