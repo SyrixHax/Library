@@ -117,7 +117,7 @@ function library:Window(name)
 
 	UiWindow.Name = "UiWindow"
 	UiWindow.Parent = SlashUiLib
-	UiWindow.BackgroundColor3 = Color3.fromRGB(100, 0, 190)
+	UiWindow.BackgroundColor3 = Color3.new(255/255, 0/255, 0/255)
 	UiWindow.BorderColor3 = Color3.fromRGB(100, 0, 190)
 	UiWindow.Position = UDim2.new(0, xOffset, 0, 20)
 	UiWindow.Size = UDim2.new(0, 207, 0, 33)
@@ -129,7 +129,7 @@ function library:Window(name)
 
 	Header.Name = "Header"
 	Header.Parent = UiWindow
-	Header.BackgroundColor3 = Color3.new(255/255, 0/255, 0/255)
+	Header.BackgroundColor3 = Color3.fromRGB(100, 0, 190)
 	Header.BorderColor3 = Color3.fromRGB(100, 0, 190)
 	Header.Position = UDim2.new(0, 0, -0.0202544238, 0)
 	Header.Size = UDim2.new(0, 207, 0, 26)
@@ -183,6 +183,41 @@ function library:Window(name)
 	local functions = {}
 	sizes[winCount] = 33
 	listOffset[winCount] = 10
+
+	while true do
+		wait()
+		UiWindow.BackgroundColor3 = Color3.new(255/255, 0/255, 0/255)
+
+		for i = 0, 255, 10 do
+			wait()
+			UiWindow.BackgroundColor3 = Color3.new(255/255, i/255, 0/255)
+		end
+
+		for i = 255, 0, -10 do
+			wait()
+			UiWindow.BackgroundColor3 = Color3.new(i/255, 255/255, 0/255)
+		end
+
+		for i = 0, 255, 10 do
+			wait()
+			UiWindow.BackgroundColor3 = Color3.new(0/255, 255/255, i/255)
+		end
+
+		for i = 255, 0, -10 do
+			wait()
+			UiWindow.BackgroundColor3 = Color3.new(0/255, i/255, 255/255)
+		end
+
+		for i = 0, 255, 10 do
+			wait()
+			UiWindow.BackgroundColor3 = Color3.new(i/255, 0/255, 255/255)
+		end
+
+		for i = 255, 0, -10 do
+			wait()
+			UiWindow.BackgroundColor3 = Color3.new(255/255, 0/255, i/255)
+		end
+	end
 
 	function functions:Button(name, callback)
 		local callback = callback or function() end
@@ -771,41 +806,6 @@ function library:Window(name)
 		end
 
 		return dropFunctions
-	end
-
-	while true do
-		wait()
-		Header.BackgroundColor3 = Color3.new(255/255, 0/255, 0/255)
-
-		for i = 0, 255, 10 do
-			wait()
-			Header.BackgroundColor3 = Color3.new(255/255, i/255, 0/255)
-		end
-
-		for i = 255, 0, -10 do
-			wait()
-			Header.BackgroundColor3 = Color3.new(i/255, 255/255, 0/255)
-		end
-
-		for i = 0, 255, 10 do
-			wait()
-			Header.BackgroundColor3 = Color3.new(0/255, 255/255, i/255)
-		end
-
-		for i = 255, 0, -10 do
-			wait()
-			Header.BackgroundColor3 = Color3.new(0/255, i/255, 255/255)
-		end
-
-		for i = 0, 255, 10 do
-			wait()
-			Header.BackgroundColor3 = Color3.new(i/255, 0/255, 255/255)
-		end
-
-		for i = 255, 0, -10 do
-			wait()
-			Header.BackgroundColor3 = Color3.new(255/255, 0/255, i/255)
-		end
 	end
 
 	return functions
