@@ -129,7 +129,7 @@ function library:Window(name)
 
 	Header.Name = "Header"
 	Header.Parent = UiWindow
-	Header.BackgroundColor3 = Color3.fromRGB(100, 0, 190)
+	Header.BackgroundColor3 = Color3.new(255/255, 0/255, 0/255)
 	Header.BorderColor3 = Color3.fromRGB(100, 0, 190)
 	Header.Position = UDim2.new(0, 0, -0.0202544238, 0)
 	Header.Size = UDim2.new(0, 207, 0, 26)
@@ -155,16 +155,16 @@ function library:Window(name)
 	Minimise.Size = UDim2.new(0, 22, 0, 22)
 	Minimise.ZIndex = 7 + zindex
 	Minimise.Font = Enum.Font.SourceSansLight
-	Minimise.Text = "_"
+	Minimise.Text = "ʌ"
 	Minimise.TextColor3 = Color3.fromRGB(0, 0, 0)
 	Minimise.TextSize = 20.000
 	Minimise.MouseButton1Up:connect(function()
 		Window.Visible = not Window.Visible
-	if Window.Visible then
-		Minimise.Text = "_"
-	else
-		Minimise.Text = "+"
-	end
+		if Window.Visible then
+			Minimise.Text = "ʌ"
+		else
+			Minimise.Text = "v"
+		end
 	end)
 
 	Window.Name = "Window"
@@ -430,7 +430,7 @@ function library:Window(name)
 						local xOffset = mouse.X - delta1 - 3
 						if xOffset > 175 then
 							xOffset = 175
-						elseif xOffset< 0 then
+						elseif xOffset < 0 then
 							xOffset = 0
 						end
 						SliderButton.Position = UDim2.new(0, xOffset , -1.33333337, 0)
@@ -596,7 +596,7 @@ function library:Window(name)
 		DownSign.Position = UDim2.new(0, 155, 0, 2)
 		DownSign.Size = UDim2.new(0, 27, 0, 22)
 		DownSign.Font = Enum.Font.SourceSans
-		DownSign.Text = "^"
+		DownSign.Text = "V"
 		DownSign.TextColor3 = Color3.fromRGB(0, 0, 0)
 		DownSign.TextSize = 20.000
 		DownSign.ZIndex = 4 + zindex
@@ -608,7 +608,7 @@ function library:Window(name)
 		DropdownFrame.BackgroundColor3 = Color3.fromRGB(100, 0, 190)
 		DropdownFrame.BorderColor3 = Color3.fromRGB(100, 0, 190)
 		DropdownFrame.Position = UDim2.new(0, 0, 0, 28)
-		DropdownFrame.Size = UDim2.new(0, 182, 0, 0)
+		DropdownFrame.Size = UDim2.new(0, 182, 0, 150)
 		DropdownFrame.Visible = false
 		DropdownFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 		DropdownFrame.ScrollBarThickness = 4
@@ -648,10 +648,6 @@ function library:Window(name)
 			DropdownFrame.Visible = false
 			DropdownFrame.CanvasSize = UDim2.new(0, 182, 0, canvasSize + 1)
 
-			if #DropdownFrame:GetChildren() < 8 then
-				DropdownFrame.Size = UDim2.new(0, 182, 0, DropdownFrame.Size.Y.Offset + 27)
-			end
-
 			if selective then
 				Dropdown.Text = name
 			end
@@ -677,10 +673,6 @@ function library:Window(name)
 			canvasSize = canvasSize + 27
 			DropdownFrame.Visible = false
 			DropdownFrame.CanvasSize = UDim2.new(0, 182, 0, canvasSize + 1)
-
-			if #DropdownFrame:GetChildren() < 8 then
-				DropdownFrame.Size = UDim2.new(0, 182, 0, DropdownFrame.Size.Y.Offset + 27)
-			end
 
 			pastSliders[winCount] = false
 		end
@@ -713,10 +705,6 @@ function library:Window(name)
 			canvasSize = canvasSize + 33
 			DropdownFrame.Visible = false
 			DropdownFrame.CanvasSize = UDim2.new(0, 182, 0, canvasSize + 1)
-
-			if #DropdownFrame:GetChildren() < 8 then
-				DropdownFrame.Size = UDim2.new(0, 182, 0, DropdownFrame.Size.Y.Offset + 33)
-			end
 
 			pastSliders[winCount] = false
 		end
@@ -775,34 +763,7 @@ function library:Window(name)
 			DropdownFrame.Visible = false
 			DropdownFrame.CanvasSize = UDim2.new(0, 182, 0, canvasSize + 1)
 
-			if #DropdownFrame:GetChildren() < 8 then
-					DropdownFrame.Size = UDim2.new(0, 182, 0, DropdownFrame.Size.Y.Offset + 27)
-			end
-
 			pastSliders[winCount] = false
-		end
-
-		function dropFunctions:Remove(name)
-			local foundIt
-			for i, v in pairs(DropdownFrame:GetChildren()) do
-				if foundIt then
-					canvasSize = canvasSize - 27
-					v.Position = UDim2.new(0, 6, 0, v.Position.Y.Offset - 27)
-					DropdownFrame.CanvasSize = UDim2.new(0, 182, 0, canvasSize + 1)
-				end
-
-				if v.Text == name then
-					foundIt = true
-					v:Destroy()
-					if #DropdownFrame:GetChildren() < 8 then
-						DropdownFrame.Size = UDim2.new(0, 182, 0, DropdownFrame.Size.Y.Offset - 27)
-					end
-				end
-			end
-
-			if not foundIt then
-				warn("The button you tried to remove didn't exist!")
-			end
 		end
 
 		for i, v in pairs(buttons) do
@@ -812,42 +773,42 @@ function library:Window(name)
 		return dropFunctions
 	end
 
+	while true do
+		wait()
+		Header.BackgroundColor3 = Color3.new(255/255, 0/255, 0/255)
+
+		for i = 0, 255, 10 do
+			wait()
+			Header.BackgroundColor3 = Color3.new(255/255, i/255, 0/255)
+		end
+
+		for i = 255, 0, -10 do
+			wait()
+			Header.BackgroundColor3 = Color3.new(i/255, 255/255, 0/255)
+		end
+
+		for i = 0, 255, 10 do
+			wait()
+			Header.BackgroundColor3 = Color3.new(0/255, 255/255, i/255)
+		end
+
+		for i = 255, 0, -10 do
+			wait()
+			Header.BackgroundColor3 = Color3.new(0/255, i/255, 255/255)
+		end
+
+		for i = 0, 255, 10 do
+			wait()
+			Header.BackgroundColor3 = Color3.new(i/255, 0/255, 255/255)
+		end
+
+		for i = 255, 0, -10 do
+			wait()
+			Header.BackgroundColor3 = Color3.new(255/255, 0/255, i/255)
+		end
+	end
+
 	return functions
-end
-
-local script = Instance.new('LocalScript', Header)
-	
-while wait() do
-	Header.BackgroundColor3 = Color3.new(255/255, 0/255, 0/255)
-
-	for i = 0, 255, 10 do
-		wait()
-		Header.BackgroundColor3 = Color3.new(255/255, i/255, 0/255)
-	end
-
-	for i = 255, 0, -10 do
-		wait()
-		Header.BackgroundColor3 = Color3.new(i/255, 255/255, 0/255)
-	end
-
-	for i = 0, 255, 10 do
-		Header.BackgroundColor3 = Color3.new(0/255, 255/255, i/255)
-	end
-
-	for i = 255, 0, -10 do
-		wait()
-		Header.BackgroundColor3 = Color3.new(0/255, i/255, 255/255)
-	end
-
-	for i = 0, 255, 10 do
-		wait()
-		Header.BackgroundColor3 = Color3.new(i/255, 0/255, 255/255)
-	end
-
-	for i = 255, 0, -10 do
-		wait()
-		Header.BackgroundColor3 = Color3.new(255/255, 0/255, i/255)
-	end
 end
 
 return library
