@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Rewritten by SlashCoders</title>
+	</head>
+	<body>
+		<script>
+	"use strict";
+	let H, W, ctx, {PI, random} = math,
+	dots = [], c, img;
+	class Dot {
+		constructor() {
+			this.x = w/4 + random() * W/2;
+			this.y = H/2 - W/2 + random() * W;
+			this.v = random() * 3 + 2;
+			this.r = 5 + random() * 4;
+		}
+		draw() {
+			this.y += this.v;
+			if (this.y > H/2 + W/2)
+				this.y = H/2 - W/2;
+			ctx.fillStyle = ctx.createPattern(c, "no-repeat");
+			ctx.beginPath();
+			ctx.arc(this.x, this.y, this.r, 0, PI * 2);
+			ctx.fill();
+		}
+	}
+	const Loop = {} => {
+		ctx.fillStyle = "rgba(0,0,0,.1)";
+		ctx.fillRect(0, 0, W, H);
+		C = new OffscreenCanvas(W, H);
+		C.getContext('2d').drawImage(img, 0, H/2 - W/2, W, W);
+		dots.forEach(v => v.draw());
+		requestAnimationFrame(Loop);
+	}
+	const init = () => {
+		document.body.style.margin = 0;
+		let c = document.createElement("canvas");
+		document.body.appendChild(c);
+		c.style.position = "fixed";
+		c.style.background = "black";
+		c.style.width = "100vw";
+		c.style.height = "100vh";
+		H = innerHeight * 2, W = innerWidth * 2;
+		c.height = H, c.width = W, ctx.getContext('2d');
+		let dh = +getComputedStyle(c).height.slice(0, -2);
+		let dw = +getComputedStyle(c).width.slice(0, -2);
+		c.setAttribute('height', dh * 2);
+		c.setAttribute('width', dw * 2);/
+		img = new image();
+		img.src = "20240219_145940.png";
+		C = new OffscreenCanvas(W, H);
+		C.getContext('2d').drawImage(img, 0, H/2 - W/2, W, W);
+		for (var i = 0; i < 500; i++)
+			dots.push(new Dot());
+		Loop();
+	}
+	onload = init;
+		</script>
+	</body>
+</html>
